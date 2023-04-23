@@ -29,6 +29,7 @@ HEADERS += \
     PoolAllocator.h \
     Streamer.h \
     StreamerContainer.h \
+    TwoSlotAllocator.h \
     runner.h \
     streamercontaineraccesser.h \
     videoplayer.h

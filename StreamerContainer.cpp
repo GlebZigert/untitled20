@@ -101,7 +101,7 @@ void StreamerContainer::func(){
                         )
                 {
 
-/*
+
                     auto now = QDateTime::currentDateTime();
                     auto diff = one.data()->no_followers.secsTo(now);
                     //   qDebug()<<"этот поток "<<one.data()->getURL()<<" хранится уже "<<diff<<" сек";
@@ -113,8 +113,8 @@ void StreamerContainer::func(){
                         one.data()->stop();
                     }
 
-*/
 
+/*
                     if(one.data()->runner->getVideoHeight()>600&&
                        one.data()->runner->getVideoWidth()>800
                        ){
@@ -137,6 +137,7 @@ void StreamerContainer::func(){
                         one->runner->go_to_low_mode=true;
                             }
                     }
+                    */
 
                 }
 
