@@ -17,7 +17,7 @@ QSharedPointer<Statistic> Runner::m_pAVCodec=QSharedPointer<Statistic>::create("
 QSharedPointer<Statistic> Runner::m_pFormatCtx=QSharedPointer<Statistic>::create("m_pFormatCtx");
 QSharedPointer<Statistic> Runner::m_options=QSharedPointer<Statistic>::create("m_options");
 QSharedPointer<Statistic> Runner::m_param=QSharedPointer<Statistic>::create("m_param");
-
+QSharedPointer<PoolAllocator<int>> Runner::allocator=QSharedPointer<PoolAllocator<int>>::create();
 #define AVIO_FLAG_NONBLOCK   8
 
 static std::mutex local_mutex;

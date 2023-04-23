@@ -26,6 +26,8 @@ extern "C"{
     #include <libavutil/hwcontext.h>
 }
 
+#include <PoolAllocator.h>
+
 class Statistic : public QObject{
 
     Q_OBJECT
@@ -72,6 +74,8 @@ public:
     static int av_codec_open;
     static int av_codec_not_open;
     static int av_codec_close;
+
+    static QSharedPointer<PoolAllocator<int>> allocator;
 
     bool losted=false;
 

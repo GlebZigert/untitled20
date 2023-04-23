@@ -8,9 +8,9 @@
 
 template <typename T>
 
-class PoolAllocator : public QObject
+class PoolAllocator
 {
-    Q_OBJECT
+
 public:
 using value_type = T;
 PoolAllocator(): pool_(reinterpret_cast<uint8_t*>(::operator new(pool_size_))),pool_begin_(pool_){std::cout<<"PoolAllocator()\n";pool_begin_=pool_;}
