@@ -46,6 +46,7 @@ Window {
     onClicked: {
         player.source=path.text
         player.start(StreamType.Streaming)
+        player.info()
     }
 
     }
