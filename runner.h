@@ -75,7 +75,7 @@ public:
     static int av_codec_not_open;
     static int av_codec_close;
 
-    static QSharedPointer<PoolAllocator<int>> allocator;
+    static QSharedPointer<PoolAllocator<AVPicture>> allocator;
 
     bool losted=false;
 

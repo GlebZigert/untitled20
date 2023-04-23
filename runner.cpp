@@ -17,7 +17,7 @@ QSharedPointer<Statistic> Runner::m_pAVCodec=QSharedPointer<Statistic>::create("
 QSharedPointer<Statistic> Runner::m_pFormatCtx=QSharedPointer<Statistic>::create("m_pFormatCtx");
 QSharedPointer<Statistic> Runner::m_options=QSharedPointer<Statistic>::create("m_options");
 QSharedPointer<Statistic> Runner::m_param=QSharedPointer<Statistic>::create("m_param");
-QSharedPointer<PoolAllocator<int>> Runner::allocator=QSharedPointer<PoolAllocator<int>>::create();
+QSharedPointer<PoolAllocator<AVPicture>> Runner::allocator=QSharedPointer<PoolAllocator<AVPicture>>::create();
 #define AVIO_FLAG_NONBLOCK   8
 
 static std::mutex local_mutex;
@@ -443,14 +443,19 @@ void Runner::free_settings()
 {
 
 
-   if(pAVPicture!=NULL){
-    //qDebug()<<"avpicture_free(pAVPicture)-->";
-   avpicture_free(pAVPicture);
-   delete pAVPicture;
-      pAVPicture=NULL;
-      *data=NULL;
-   //qDebug()<<"avpicture_free(pAVPicture)<--";
-   }
+    if(pAVPicture!=NULL){
+        qDebug()<<"avpicture_free(pAVPicture)-->";
+        avpicture_free(pAVPicture);
+        qDebug()<<"--> delete pAVPicture";
+
+        allocator->deallocate(pAVPicture,sizeof(AVPicture));
+      //  delete pAVPicture;
+
+        qDebug()<<"<-- delete pAVPicture";
+        pAVPicture=NULL;
+        *data=NULL;
+        qDebug()<<"avpicture_free(pAVPicture)<--";
+    }
 
 
  //qDebug()<<"freeSettings --> ";
@@ -674,7 +679,12 @@ void Runner::run()
             //qDebug()<<"pAVPicture: "<<(pAVPicture==NULL);
             if(pAVPicture==NULL){
              //qDebug()<<"pAVPicture = new AVPicture()-->";
-                pAVPicture = new AVPicture();
+
+                pAVPicture = allocator->allocate(sizeof(AVPicture));
+
+             //   pAVPicture = new AVPicture();
+
+
               //   qDebug()<<"pAVPicture: "<<pAVPicture;
               //  qDebug()<<"sizeof(AVPicture): "<<sizeof(AVPicture);
              //qDebug()<<"pAVPicture = new AVPicture()<--";
