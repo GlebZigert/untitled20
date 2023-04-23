@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 1.4 as QQC1
+import VideoPlayer 1.0
+import MyQMLEnums 13.37
 Window {
     width: 640
     height: 480
@@ -12,13 +14,13 @@ Window {
     anchors.fill: parent
     width: parent.width
     height: parent.height
-    Rectangle{
+    VideoPlayer{
 
-    id: video
+    id: player
     width: parent.width
     height: parent.height-20
 
-color:"green"
+
     }
 
     Row{
@@ -31,6 +33,7 @@ color:"green"
 
     TextInput{
     id: path
+    text: "/home/master/1.mp4"
     height: parent.height
     width: 580
 
@@ -40,6 +43,10 @@ color:"green"
 
     height: parent.height
     width: 20
+    onClicked: {
+        player.source=path.text
+        player.start(StreamType.Streaming)
+    }
 
     }
 

@@ -1,6 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "videoplayer.h"
+#include "runner.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +12,8 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
+    qmlRegisterType<VideoPlayer>("VideoPlayer",1,0,"VideoPlayer");
+    Runner::declareQML();
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
